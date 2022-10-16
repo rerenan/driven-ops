@@ -1,12 +1,15 @@
 FROM node:16
 
-WORKDIR /usr/src/
+# pasta para aonde vai o build
+WORKDIR /app
 
 COPY . .
-
-EXPOSE 3000
-
 RUN npm i
 RUN npm run build
 
-CMD ["npm", "start"]
+RUN mkdir -p /var/www/html
+RUN mv build/* /var/www/html
+
+WORKDIR /
+
+RUN rm -rf /app
