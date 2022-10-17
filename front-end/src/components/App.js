@@ -4,8 +4,9 @@ import { useEffect, useState } from 'react';
 function App() {
   const [student, setStudent] = useState(null);
 
-  useEffect(async () => {
-    const API_URL = process.env.REACT_APP_BASE_URL;
+  useEffect( () => {
+    async function raffle(){
+      const API_URL = process.env.REACT_APP_BASE_URL;
     try {
       const response = await axios.get(`${API_URL}/students/random`);
       const student = response.data;
@@ -17,6 +18,9 @@ function App() {
     } catch (error) {
       alert('Não foi possível realizar o sorteio!');
     }
+    }
+    raffle();
+    
   }, []);
 
   return student ? <h1>{student.name}</h1> : 'Carregando...';

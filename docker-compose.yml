@@ -1,5 +1,28 @@
 version: "3"
+
+
 services:
+  database:
+    image: postgres
+    container_name: database_students
+    restart: always
+    ports:
+     - 4321:5432
+    env_file:
+     - ./back-end/.env
+    volumes:
+      - pg_students:/var/lib/postgresql/data
+
+  app_node:
+    container_name: node_students
+    build: ./back-end
+    ports:
+     - 5000:5000
+    env_file:
+     - ./back-end/.env
+    depends_on:
+     - database
+
   app_react:
     build: ./front-end
     container_name: app_react
@@ -15,6 +38,9 @@ services:
       - build_react:/var/www/html
     depends_on:
       - app_react
+      - app_node
+      - database
 
 volumes:
   build_react:
+  pg_students:
