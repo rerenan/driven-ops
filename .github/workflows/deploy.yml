@@ -30,6 +30,6 @@ jobs:
       - name: Build process
         run: docker-compose build
       - name: Run app docker compose up
-        run: docker-compose down && docker-compose up
+        run: docker-compose down && docker-compose up -d
       - name: Run app docker compose up nginx
         run: docker-compose down -v && docker-compose up --build -d nginx
