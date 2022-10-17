@@ -2,7 +2,8 @@ name: PullRequest
 on: [pull_request]
 jobs:
   PullRequest:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
       - name: Check out repository code
         uses: actions/checkout@v3
